@@ -109,6 +109,11 @@
     steam
   ];
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.overpass
+  ];
+
   programs.steam = {
     enable = true;
     package = pkgs.steam.override {

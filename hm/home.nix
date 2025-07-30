@@ -8,7 +8,7 @@ in {
   imports = [
     ../stylix.nix
 
-    ../waybar/waybar.nix
+    ../waybar.nix
 
     inputs.stylix.homeModules.stylix
     inputs.niri.homeModules.niri
@@ -45,13 +45,10 @@ in {
 
       dust
       usbutils pciutils
-      toybox
 
       xwayland-satellite
 
       ardour
-
-      corefonts
 
       inputs.zen-browser.packages."${system}".default
     ];
@@ -206,6 +203,7 @@ in {
         { command = [ "hyprpaper" ]; }
         { command = [ "xwayland-satellite" ]; }
         { command = [ "waybar" ]; }
+        { command = [ "swaync" ]; }
       ];
     };
   };
