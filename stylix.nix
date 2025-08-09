@@ -7,8 +7,6 @@
     base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
     image = ./wallpapers/bay.JPG;
 
-    targets.gtk.enable = true;
-    targets.xfce.enable = true;
 
     cursor = {
       package = pkgs.rose-pine-cursor;

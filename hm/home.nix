@@ -25,17 +25,11 @@ in {
 
     packages  = with pkgs; [
       hyprpaper
-
-      heroic
-      gamemode
-      protontricks
-      protonup
       
       obsidian
       libreoffice-fresh
       gimp
-
-      unrar
+      
       p7zip
       unzip
       pavucontrol
@@ -48,10 +42,6 @@ in {
       dconf
       git
       zathura
-      gamescope
-
-      lutris
-      
 
       dust
       usbutils pciutils

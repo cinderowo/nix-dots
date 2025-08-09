@@ -62,22 +62,13 @@
   };
 
   # display manager setup
-   
   services.greetd.enable = true;
   services.greetd.settings.default_session.command = "dbus-run-session niri";
+  services.greetd.settings.default_session.user = "uwu";
   security.pam.services.greetd.enableGnomeKeyring = true;
-  services.xserver.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-  # services.xserver.displayManager.sddm.enable = true;
-
-  environment.etc."greetd/environments".text = ''
-    dbus-run-session niri
-    startxfce4
-  '';
 
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
-  
 
   # bluetooth
   hardware.bluetooth.enable = true;
@@ -116,14 +107,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     steam
-
-    kdePackages.sddm-kcm
-    kdePackages.akonadi
-    kdePackages.akonadiconsole
-    kdePackages.akonadi-search
-  
-    wayland-utils
-    wl-clipboard
   ];
 
   fonts.packages = with pkgs; [
