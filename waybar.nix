@@ -98,14 +98,14 @@ in {
 
     .modules-left {
       background: alpha(#${colors.base00}, .6);
-      margin: 10 0 5 10;
+      margin: 10 0 0 10;
       padding: 2px;
       border-radius: 10px;
     }
 
     .modules-right {
       background: alpha(#${colors.base00}, .6);
-      margin: 10 10 5 0;
+      margin: 10 10 0 0;
       padding: 2px;
       border-radius: 10px;
     }
