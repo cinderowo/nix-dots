@@ -12,6 +12,7 @@ in {
 
     inputs.stylix.homeModules.stylix
     inputs.niri.homeModules.niri
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   nixpkgs = {
@@ -29,6 +30,13 @@ in {
       obsidian
       libreoffice-fresh
       gimp
+      vscode
+      lutris
+
+      heroic
+      protonup
+      gamemode
+      gamescope
       
       p7zip
       unzip
@@ -49,6 +57,12 @@ in {
       xwayland-satellite
 
       ardour
+      jack2
+      qjackctl
+      jack_capture
+      guitarix
+      kapitonov-plugins-pack
+      metersLv2
 
       inputs.zen-browser.packages."${system}".default
     ];
@@ -56,40 +70,18 @@ in {
 
 
   services = {
+    flatpak = {
+      enable = true;
+      packages = [
+        "org.vinegarhq.Sober"
+      ];
+    };
     hyprpaper = {
       enable = true;
     };
     swaync = {
       enable = true;
     };
-    # kanshi = {
-    #   enable = true;
-    #   systemdTarget = "niri-session.target";
-
-    #   profiles = {
-    #     docked.outputs = [
-    #       {
-    #         criteria = "eDP-1";
-    #         mode = "1920x1080";
-    #         position = "0,0";
-    #         status = "enable";
-    #       }
-    #       {
-    #         criteria = "DP-4";
-    #         mode = "1920x1080";
-    #         position = "1920,0";
-    #         status = "enable";
-    #       }
-    #       {
-    #         criteria = "DP-7";
-    #         mode = "1680x1050";
-    #         position = "3840,0";
-    #         status = "enable";
-    #         transform = "90";
-    #       }
-    #     ];
-    #   };
-    # };
   };
   
   programs = {
@@ -110,7 +102,6 @@ in {
     };
     waybar = {
       enable = true;
-      
     };
     niri = {
       enable = true;
@@ -202,7 +193,7 @@ in {
       settings.spawn-at-startup = [
         { command = [ "hyprpaper" ]; }
         { command = [ "xwayland-satellite" ]; }
-        { command = [ "waybar" ]; }
+        # { command = [ "waybar" ]; }
         { command = [ "swaync" ]; }
       ];
     };

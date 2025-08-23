@@ -13,11 +13,13 @@
 
     stylix.url = "github:nix-community/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
 
 
-  outputs = { self, nixpkgs, home-manager, niri, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, niri, stylix, nix-flatpak, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -27,10 +29,12 @@
         uwu = lib.nixosSystem {
           specialArgs = { inherit inputs; };
           inherit system;
+          
           modules = [
             ./configuration.nix
 
             stylix.nixosModules.stylix
+            nix-flatpak.nixosModules.nix-flatpak
             
             home-manager.nixosModules.home-manager
             {

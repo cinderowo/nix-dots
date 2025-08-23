@@ -53,19 +53,43 @@
   };
 
   home-manager.users.uwu = import /home/uwu/.dotfiles/hm/home.nix;
+  home-manager.backupFileExtension = "hm-backup";
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.uwu = {
     isNormalUser = true;
     description = "charles";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "audio" ];
     packages = with pkgs; [];
   };
 
+  environment.sessionVariables = {
+    # flatpak dirs
+    XDG_DATA_DIRS = [
+      "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
+    ];
+  };
+
+  services.flatpak.enable = true;
+
+  # vm
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = ["uwu"];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
   # display manager setup
-  services.greetd.enable = true;
-  services.greetd.settings.default_session.command = "dbus-run-session niri";
-  services.greetd.settings.default_session.user = "uwu";
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  # services.greetd.enable = true;
+  # services.greetd.settings.default_session.command = "dbus-run-session niri";
+  # services.greetd.settings.default_session.user = "uwu";
+  # security.pam.services.greetd.enableGnomeKeyring = true;
+
+  programs.niri.enable = true;
+  programs.niri.package = pkgs.niri;
+  
+  services.xserver.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.wlr.enable = true;
@@ -125,6 +149,18 @@
     };
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
+
+  # jack
+  # services.jack = {
+  #   jackd.enable = true;
+  # };
+
+  security.pam.loginLimits = [
+    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+    { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
+    { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
+    { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
