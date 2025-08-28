@@ -31,6 +31,16 @@
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
 
+  # filesystem
+  fileSystems."/external" = {
+    device = "/dev/sda1";
+    fsType = "ext4";
+    options = [
+      "users"
+      "nofail"
+    ];
+  };
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
 
@@ -52,6 +62,8 @@
     variant = "";
   };
 
+  programs.zsh.enable = true;
+
   home-manager.users.uwu = import /home/uwu/.dotfiles/hm/home.nix;
   home-manager.backupFileExtension = "hm-backup";
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -60,6 +72,8 @@
     description = "charles";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "audio" ];
     packages = with pkgs; [];
+
+    shell = pkgs.zsh;
   };
 
   environment.sessionVariables = {
@@ -87,6 +101,8 @@
   programs.niri.package = pkgs.niri;
   
   services.xserver.enable = true;
+  services.xserver.displayManager.startx.enable = true;
+  services.xserver.windowManager.ratpoison.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -130,6 +146,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    vulkan-tools
+    vulkan-loader
+    vulkan-validation-layers
+  
     steam
   ];
 
@@ -145,6 +165,9 @@
       extraPkgs =
         pkgs: with pkgs; [
           gamemode
+
+          vulkan-loader
+          vulkan-validation-layers
         ];
     };
     extraCompatPackages = [ pkgs.proton-ge-bin ];

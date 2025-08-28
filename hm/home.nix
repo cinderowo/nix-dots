@@ -45,11 +45,15 @@ in {
       nautilus
       tidal-hifi
       qbittorrent
-      firefox
       brightnessctl
       dconf
       git
       zathura
+      swaynotificationcenter
+      btop
+
+      zsh-autosuggestions
+      zsh-syntax-highlighting
 
       dust
       usbutils pciutils
@@ -57,6 +61,7 @@ in {
       xwayland-satellite
 
       ardour
+      alsa-utils
       jack2
       qjackctl
       jack_capture
@@ -91,9 +96,6 @@ in {
     foot = {
       enable = true;
     };
-    zsh = {
-      enable = true;
-    };
     fuzzel = {
       enable = true;
     };
@@ -103,6 +105,19 @@ in {
     waybar = {
       enable = true;
     };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+
+      initContent = ''
+        alias prime-run="__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia __VK_LAYER_NV_optimus=NVIDIA_only"
+      
+        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        # source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      '';
+    };
+    bash.enable = false;
     niri = {
       enable = true;
       settings.outputs = {
@@ -195,6 +210,7 @@ in {
         { command = [ "xwayland-satellite" ]; }
         # { command = [ "waybar" ]; }
         { command = [ "swaync" ]; }
+        { command = [ "../scripts/mntext" ]; }
       ];
     };
   };
