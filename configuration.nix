@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, unstablepkgs, lib, inputs, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -30,16 +30,6 @@
 
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
-
-  # filesystem
-  fileSystems."/external" = {
-    device = "/dev/sda1";
-    fsType = "ext4";
-    options = [
-      "users"
-      "nofail"
-    ];
-  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_AU.UTF-8";
@@ -116,31 +106,6 @@
 
   services.blueman.enable = true;
 
-  # nvidia
-  hardware.graphics = {
-    enable = true;
-  };
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    modesetting.enable = true;
-
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-
-    open = false;
-
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    prime = {
-      sync.enable = true;
-    
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   # List packages installed in system profile. To search, run:
@@ -151,6 +116,14 @@
     vulkan-validation-layers
   
     steam
+    
+    (
+      unstablepkgs.vintagestory.overrideAttrs (old: rec {
+        postInstall = ''
+          cp -r ${/home/uwu/.dotfiles/extra/vintage_crack}/* $out/share/vintagestory/
+        '';
+      })
+    )
   ];
 
   fonts.packages = with pkgs; [
@@ -172,6 +145,8 @@
     };
     extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
+
+  services.tailscale.enable = true;
 
   # jack
   # services.jack = {

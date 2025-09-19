@@ -7,7 +7,6 @@ let
 in {
   imports = [
     ../stylix.nix
-
     ../waybar.nix
 
     inputs.stylix.homeModules.stylix
@@ -18,20 +17,27 @@ in {
   nixpkgs = {
     config = {
       allowUnfree = true;
+
+      permittedInsecurePackages = [
+        "dotnet-runtime-7.0.20"
+      ];
     };
   };
   
   home = {
     stateVersion = "25.05";
 
-    packages  = with pkgs; [
+    packages = with pkgs; [
       hyprpaper
+      # tailscale
       
       obsidian
+      anki
       libreoffice-fresh
       gimp
       vscode
       lutris
+      lynx
 
       heroic
       protonup
@@ -87,6 +93,9 @@ in {
     swaync = {
       enable = true;
     };
+    # tailscale = {
+    #   enable = true;
+    # };
   };
   
   programs = {
@@ -128,6 +137,10 @@ in {
             width = 1920;
             height = 1080;
           };
+          position = {
+            x = 0;
+            y = 0;
+          };
         };
         # middle horizontal
         "DP-4" = {
@@ -138,22 +151,22 @@ in {
             refresh = 60.0;
           };
           position = {
-            x = 1920;
+            x = 1919;
             y = 0;
           };
         };
         # rightmost vertical
-        "DP-7" = {
+        "DP-5" = {
           scale = 1.0;
           transform.rotation = 90;
           mode = {
             width = 1680;
             height = 1050;
           };
-          position = {
-            x = 3840;
-            y = 0;
-          };
+          # position = {
+          #   x = 3839;
+          #   y = 0;
+          # };
         };
       };
     
