@@ -38,6 +38,7 @@ in {
       vscode
       lutris
       lynx
+      fastfetch
 
       heroic
       protonup
@@ -74,6 +75,9 @@ in {
       guitarix
       kapitonov-plugins-pack
       metersLv2
+      vital
+      decent-sampler
+      sfizz
 
       inputs.zen-browser.packages."${system}".default
     ];
