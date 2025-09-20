@@ -78,6 +78,7 @@ in {
       vital
       decent-sampler
       sfizz
+      lmms
 
       inputs.zen-browser.packages."${system}".default
     ];
