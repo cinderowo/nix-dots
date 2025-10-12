@@ -52,6 +52,11 @@
     variant = "";
   };
 
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    LidSwitchIgnoreInhibited=no
+  '';
+
   programs.zsh.enable = true;
 
   home-manager.users.uwu = import /home/uwu/.dotfiles/hm/home.nix;
@@ -72,8 +77,12 @@
       "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
     ];
   };
-
+  
   services.flatpak.enable = true;
+
+  services.thermald = {
+    enable = true;
+  };
 
   # vm
   programs.virt-manager.enable = true;
@@ -159,6 +168,8 @@
     { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
     { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
   ];
+
+  musnix.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

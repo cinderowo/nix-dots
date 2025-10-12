@@ -21,12 +21,13 @@ in {
       modules-left = [
         "custom/notification"
         "clock"
-        "tray"
+        # "tray"
       ];
       
       modules-right = [
-        "bluetooth"
-        "network"
+        "tray"
+        # "bluetooth"
+        # "network"
         "battery"
       ];
 
@@ -48,23 +49,23 @@ in {
         };
       };
 
-      network = {
-        format-wifi = "";
-        format-ethernet = "";
-        format-disconnected = "";
-        tooltip-format-disconnected = "Error";
-        tooltoplformat-wifi = "{essid} ({signalStrength}%) ";
-        on-click = "foot nmtui";
-      };
+      # network = {
+      #   format-wifi = "";
+      #   format-ethernet = "";
+      #   format-disconnected = "";
+      #   tooltip-format-disconnected = "Error";
+      #   tooltoplformat-wifi = "{essid} ({signalStrength}%) ";
+      #   on-click = "foot nmtui";
+      # };
 
-      bluetooth = {
-        format-on = "󰂯";
-        format-off = "BT-off";
-        format-disabled = "󰂲";
-        format-connected-battery = "{device_battery_percentage}% 󰂯";
-        format-alt = "{device_alias} 󰂯";
-        on-click-right = "blueman-manager";
-      };
+      # bluetooth = {
+      #   format-on = "󰂯";
+      #   format-off = "BT-off";
+      #   format-disabled = "󰂲";
+      #   format-connected-battery = "{device_battery_percentage}% 󰂯";
+      #   format-alt = "{device_alias} 󰂯";
+      #   on-click-right = "blueman-manager";
+      # };
 
       battery = {
         interval = 30;
@@ -127,21 +128,6 @@ in {
       transition: all .3s ease;
       color: #${colors.base0D};
     }
-
-    #bluetooth {
-      margin: 1px 1px 1px 1px;
-      padding: 0px 5px;
-      transition: all .3s ease;
-      color: #${colors.base0D};
-    }
-
-    #network {
-      margin: 1px 1px 1px 1px;
-      padding: 0px 9px;
-      transition: all .3s ease;
-      color: #${colors.base0D};
-    }
-
     
     #battery {
       margin: 1px 1px 1px 1px;

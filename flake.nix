@@ -17,11 +17,13 @@
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    musnix.url = "github:musnix/musnix";
   };
 
 
 
-  outputs = { self, nixpkgs, unstable-nixpkgs, home-manager, niri, stylix, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, unstable-nixpkgs, home-manager, niri, stylix, nix-flatpak, musnix, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -44,6 +46,8 @@
 
             stylix.nixosModules.stylix
             nix-flatpak.nixosModules.nix-flatpak
+
+            musnix.nixosModules.musnix
             
             home-manager.nixosModules.home-manager
             {

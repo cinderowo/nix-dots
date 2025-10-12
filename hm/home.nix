@@ -28,45 +28,41 @@ in {
     stateVersion = "25.05";
 
     packages = with pkgs; [
-      hyprpaper
-      # tailscale
-      
-      obsidian
-      anki
-      libreoffice-fresh
-      gimp
-      vscode
-      lutris
-      lynx
+      # sys utils
+      parted
+      vscode-langservers-extracted
       fastfetch
-
-      heroic
-      protonup
-      gamemode
-      gamescope
-      
       p7zip
       unzip
-      pavucontrol
-      element-desktop
       nautilus
-      tidal-hifi
-      qbittorrent
       brightnessctl
       dconf
-      git
-      zathura
       swaynotificationcenter
       btop
-
+      dust
+      usbutils 
+      pciutils
+      git
       zsh-autosuggestions
       zsh-syntax-highlighting
-
-      dust
-      usbutils pciutils
-
       xwayland-satellite
+      hyprpaper
 
+      # other tools
+      vivaldi
+      inputs.zen-browser.packages."${system}".default
+      libreoffice-fresh
+      obsidian
+      anki
+      (blender.override {cudaSupport = true;})
+      gimp
+      vscode
+      element-desktop
+      tidal-hifi
+      qbittorrent
+      zathura
+
+      # pro audio
       ardour
       alsa-utils
       jack2
@@ -79,11 +75,17 @@ in {
       decent-sampler
       sfizz
       lmms
+      tuxguitar
 
-      inputs.zen-browser.packages."${system}".default
+      # game stuff
+      lutris
+      heroic
+      protonup
+      gamemode
+      gamescope
+      pavucontrol
     ];
   };
-
 
   services = {
     flatpak = {
@@ -98,9 +100,6 @@ in {
     swaync = {
       enable = true;
     };
-    # tailscale = {
-    #   enable = true;
-    # };
   };
   
   programs = {
@@ -168,10 +167,6 @@ in {
             width = 1680;
             height = 1050;
           };
-          # position = {
-          #   x = 3839;
-          #   y = 0;
-          # };
         };
       };
     
